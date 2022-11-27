@@ -14,21 +14,20 @@ player.getVideoTitle().then(function (title) {
   console.log('title:', title);
 });
 
-let videotime;
-player.on('timeupdate', function (data) {
-  videotime = data.seconds;
-  return videotime;
-  //   console.log(videotime);
-});
-console.log(videotime);
+player.on(
+  'timeupdate',
+  throttle(function (data) {
+    localStorage.setItem('videoplayer', JSON.stringify(data.seconds));
+  }),
+  60000
+);
 
-// const data = localStorage.setItem('videoplayer', JSON.stringify(videotime));
+const data = localStorage.getItem('videoplayer');
+const parsetTime = JSON.parse(data);
+console.log(parsetTime);
 
-// console.log(data);
-
-/*
 player
-  .setCurrentTime(JSON.parse(localStorage.getItem(data.videotime)))
+  .setCurrentTime(parsetTime)
   .then(function (seconds) {
     // seconds = the actual time that the player seeked to
   })
@@ -43,5 +42,3 @@ player
         break;
     }
   });
-
-  */
