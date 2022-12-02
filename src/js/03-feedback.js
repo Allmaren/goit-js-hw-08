@@ -7,8 +7,6 @@ const refs = {
   textarea: document.querySelector('.feedback-form textarea'),
   email: document.querySelector('input[name=email]'),
 };
-console.log(refs.textarea);
-console.log(refs.email);
 
 refs.form.addEventListener('submit', onFormSubmit);
 refs.form.addEventListener('input', throttle(onTextareaInput, 500));
@@ -33,7 +31,6 @@ function onTextareaInput(evt) {
 function previosData() {
   const parseData = JSON.parse(localStorage.getItem(STORAGE_KEY));
   if (parseData) {
-    console.log(parseData);
     refs.textarea.value = parseData.message || '';
     refs.email.value = parseData.email || '';
   }
